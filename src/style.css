@@ -1,0 +1,73 @@
+.container-fluid {
+background:linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+font-family: 'Josefin Sans', sans-serif;
+font-weight: 600;
+color: #004e72;
+max-width: 700px;
+border: 5px solid rgb(234, 227, 191);
+border-radius: 10px;
+
+}
+h1{
+  margin-top: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.main-city{
+  font-size: 40px;
+}
+
+.col-3{
+  padding-left: 10px;
+}
+
+.main-emoji{
+  display: block;
+  font-size: 90px;
+  padding-left:45px;
+  margin-top: 35px;
+  position: relative;
+  
+}
+
+.emoji{
+    display: block;
+    font-size: 40px;
+}
+.temperatures{
+    display:block;
+    font-size: 20px;
+    margin-right: -20px;
+
+}
+.weekday {
+  display: block;
+  font-size: 25px;
+  line-height: 2.4;
+  position: relative;
+  top:-10px
+
+}
+
+.degrees{
+  display:block;
+  font-size: 14px;
+  line-height: 24px;
+  margin-top:-50px;
+  margin-left: 50px;
+  margin-bottom:30px;
+}
+
+button{
+    background:transparent;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 600;
+    color:rgba(254, 251, 237, 0.72);
+    max-width: 700px;
+    border: 1px solid rgb(254, 251, 237);
+    border-radius: 10px;
+    padding: 15px,5px ;
+}
