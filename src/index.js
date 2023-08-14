@@ -1,4 +1,3 @@
-import axios from "axios";
 
 function currentDay(date) {
   let now = new Date();
@@ -25,16 +24,15 @@ currentDay();
 
 function getWeatherData(city) {
   let apiKey = "3dce9b1c66837262a25b3f448d354a76";
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
   axios.get(`${url}`).then(showWeather);
-  console.log(axios);
 }
 
 function showWeather(response) {
   document.querySelector("#searchedCity").innerHTML = response.data.name;
   document.querySelector("#currentTemperature").innerHTML = `${Math.round(
     response.data.main.temp
-  )}°`;
+  )}℉`;
 }
 
 function enterCity(event) {
