@@ -20,7 +20,6 @@ function currentDay(timestamp) {
 let day = days[date.getDay()];
 return `${day} ${hours}:${minutes}`;
 }
-}
 
 function getWeatherData(city) {
   let apiKey = "3dce9b1c66837262a25b3f448d354a76";
@@ -34,7 +33,7 @@ function showWeather(response) {
     response.data.main.temp
   )}`;
   let dayAndTime = document.querySelector("#current-day");
-  dayAndTime.innerHTML = currentday(response.data.dt * 1000);
+  dayAndTime.innerHTML = currentDay(response.data.dt * 1000);
 
 }
 
