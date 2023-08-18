@@ -1,13 +1,15 @@
-
-function currentDay(date) {
-  let now = new Date();
-
-  let day = now.getDay();
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
+function currentDay(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10){
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+   if (minutes < 10){
+    minutes = `0${minutes}`;
 
   let days = [
-    "Sun",
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
@@ -15,12 +17,10 @@ function currentDay(date) {
     "Friday",
     "Saturday"
   ];
-
-  let dayAndTime = document.querySelector("#current-day");
-  dayAndTime.innerHTML = `${days[day]} ${hours}:${minutes}`;
+let day = days[date.getDay()];
+return `${day} ${hours}:${minutes}`;
 }
-
-currentDay();
+}
 
 function getWeatherData(city) {
   let apiKey = "3dce9b1c66837262a25b3f448d354a76";
@@ -32,7 +32,10 @@ function showWeather(response) {
   document.querySelector("#searchedCity").innerHTML = response.data.name;
   document.querySelector("#currentTemperature").innerHTML = `${Math.round(
     response.data.main.temp
-  )}℉`;
+  )}`;
+  let dayAndTime = document.querySelector("#current-day");
+  dayAndTime.innerHTML = currentday(response.data.dt * 1000);
+
 }
 
 function enterCity(event) {
@@ -52,7 +55,7 @@ function searchArea(position) {
   function checkingTempF(response) {
     let temperature = Math.round(response.data.main.temp);
     let tempF = document.querySelector("#currentTemperature");
-    tempF.innerHTML = `${temperature}℉`;
+    tempF.innerHTML = `${temperature}`;
   }
   let fahrenheit = document.querySelector("#f-temp");
 
