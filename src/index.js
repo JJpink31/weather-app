@@ -1,4 +1,4 @@
-function currentDay(timestamp) {
+function currentTime(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
   if (hours < 10){
@@ -7,6 +7,7 @@ function currentDay(timestamp) {
   let minutes = date.getMinutes();
    if (minutes < 10){
     minutes = `0${minutes}`;
+   }
 
   let days = [
     "Sunday",
@@ -19,10 +20,12 @@ function currentDay(timestamp) {
   ];
 let day = days[date.getDay()];
 return `${day} ${hours}:${minutes}`;
+
 }
 
+
 function getWeatherData(city) {
-  let apiKey = "3dce9b1c66837262a25b3f448d354a76";
+  let apiKey = "2d30ea25b634d374a2711446360cd6b2";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
   axios.get(`${url}`).then(showWeather);
 }
@@ -30,10 +33,10 @@ function getWeatherData(city) {
 function showWeather(response) {
   document.querySelector("#searchedCity").innerHTML = response.data.name;
   document.querySelector("#currentTemperature").innerHTML = `${Math.round(
-    response.data.main.temp
-  )}`;
-  let dayAndTime = document.querySelector("#current-day");
-  dayAndTime.innerHTML = currentDay(response.data.dt * 1000);
+    response.data.main.temp)}`;
+
+  let currentDay= document.querySelector("#current-day");
+  currentDay.innerHTML = currentTime(response.data.dt * 1000);
 
 }
 
@@ -55,6 +58,11 @@ function searchArea(position) {
     let temperature = Math.round(response.data.main.temp);
     let tempF = document.querySelector("#currentTemperature");
     tempF.innerHTML = `${temperature}`;
+    let iconElement=document.querySelector("#icon");
+
+    iconElement.setAttribute("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}2x.png`);
+    iconElement.setAttribute("alt",response.data.weather[0].description);
+    
   }
   let fahrenheit = document.querySelector("#f-temp");
 
