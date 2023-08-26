@@ -37,6 +37,11 @@ function showWeather(response) {
 
   let currentDay= document.querySelector("#current-day");
   currentDay.innerHTML = currentTime(response.data.dt * 1000);
+  let iconElement=document.querySelector("#icon");
+  
+  iconElement.setAttribute("src",`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  iconElement.setAttribute("alt",response.data.weather[0].description);
+    
 
 }
 
@@ -54,7 +59,7 @@ function searchArea(position) {
   let apiKey = "2d30ea25b634d374a2711446360cd6b2";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=imperial`;
 
-  function checkingTempF(response) {
+  function checkingMainTemp(response) {
     let temperature = Math.round(response.data.main.temp);
     let tempF = document.querySelector("#currentTemperature");
     tempF.innerHTML = `${temperature}`;
@@ -71,12 +76,25 @@ function searchArea(position) {
     getWeatherData(city);
   });
 
-  axios.get(apiUrl).then(checkingTempF);
+  function displayCTemp(event){
+    event.preventDefault();
+    let temperatureElement=document.querySelector("#currentTemperature");
+    let celciusTemperature= (temperatureElement - 31) * 5/9;
+    temperatureElement.innerHTML=Math.round(celciusTemperature);
+  }
+
+  axios.get(apiUrl).then(checkingMainTemp);
+
+  let cTemp=document.querySelector("#c-temp");
+cTemp.addEventListener("click",displayCTemp);
+
 }
+
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchArea);
 }
 
+let fahrenheitTemp=null; 
 let button = document.querySelector("#location");
 button.addEventListener("click", getCurrentLocation);
