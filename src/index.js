@@ -70,16 +70,6 @@ fahrenheit.addEventListener("click", function () {
   getWeatherData(city);
 });
 
-function displayCTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#currentTemperature");
-  let celciusTemperature = ((fahrenheitTemp - 31)* 5)/ 9;
-  temperatureElement.innerHTML = Math.round(celciusTemperature);
-}
-
-let cTemp = document.querySelector("#c-temp");
-cTemp.addEventListener("click", displayCTemp);
-
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchArea);
