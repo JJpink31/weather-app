@@ -1,3 +1,10 @@
+function getForecast(coords){
+  let apiKey="2d30ea25b634d374a2711446360cd6b2";
+  let url=`https://api.openweathermap.org/data/3.0/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=imperial`;
+  axios.get(`${url}`).then(getForecast);
+}
+
+
 function currentTime(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
