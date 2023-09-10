@@ -1,7 +1,6 @@
-function displayForecast(){
+function displayForecast(response){
   let forecastElement=document.querySelector("#forecast");
   
-  let forecastHTML= "";
   let days = [
     "Sunday",
     "Monday",
@@ -11,15 +10,18 @@ function displayForecast(){
     "Friday",
     "Saturday",
   ];
-  days.forEach(function(day) {
-  forecastHTML = forecastHTML +`
+  let forecastHTML= "";
+  days.forEach(function(day) {  
+   forecastHTML = 
+    forecastHTML +
+    `
     <span class="col-6">
       <img
         src="http://openweathermap.org/img/wn/50d@2x.png"
         alt=""
         width="42"
       />
-      <span class="weather-forecast-temperatures">
+      <span class="weather-forecast-temperatures"></span>
         <span class="weather-forecast-temperature-max">18</span>
         <span class="weather-forecast-temperature-min">12</span>
       <span class="weather-forecast-date">${day}</span>
@@ -28,11 +30,13 @@ function displayForecast(){
    });
   forecastElement.innerHTML = forecastHTML;
   }
-function getForecast(coords){
+function getForecast(coordinates){
   let apiKey="2d30ea25b634d374a2711446360cd6b2";
-  let url=`https://api.openweathermap.org/data/3.0/onecall?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey}&units=imperial`;
-  axios.get(url).then(displayForecast);
+  let url=`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${apiKey}&units=imperial`;
+  axios.get(`${url}`).then(displayForecast);
 }
+
+
 
 function currentTime(timestamp) {
   let date = new Date(timestamp);
@@ -58,6 +62,7 @@ function currentTime(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+
 function getWeatherData(city) {
   let apiKey = "2d30ea25b634d374a2711446360cd6b2";
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
@@ -81,6 +86,8 @@ function showWeather(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
 }
 
 function enterCity(event) {
