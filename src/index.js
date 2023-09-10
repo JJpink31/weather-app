@@ -1,9 +1,38 @@
+function displayForecast(){
+  let forecastElement=document.querySelector("#forecast");
+  
+  let forecastHTML= "";
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  days.forEach(function(day) {
+  forecastHTML = forecastHTML +`
+    <span class="col-6">
+      <img
+        src="http://openweathermap.org/img/wn/50d@2x.png"
+        alt=""
+        width="42"
+      />
+      <span class="weather-forecast-temperatures">
+        <span class="weather-forecast-temperature-max">18</span>
+        <span class="weather-forecast-temperature-min">12</span>
+      <span class="weather-forecast-date">${day}</span>
+    </span>
+    `;
+   });
+  forecastElement.innerHTML = forecastHTML;
+  }
 function getForecast(coords){
   let apiKey="2d30ea25b634d374a2711446360cd6b2";
-  let url=`https://api.openweathermap.org/data/3.0/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=imperial`;
-  axios.get(`${url}`).then(getForecast);
+  let url=`https://api.openweathermap.org/data/3.0/onecall?lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey}&units=imperial`;
+  axios.get(url).then(displayForecast);
 }
-
 
 function currentTime(timestamp) {
   let date = new Date(timestamp);
