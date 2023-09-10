@@ -1,6 +1,6 @@
-function displayForecast(response){
-  let forecastElement=document.querySelector("#forecast");
-  
+function formatDay(timestamp){
+  let date = new Date(timestamp * 1000);
+  let day= date.getDay();
   let days = [
     "Sunday",
     "Monday",
@@ -10,26 +10,36 @@ function displayForecast(response){
     "Friday",
     "Saturday",
   ];
-  let forecastHTML= "";
-  days.forEach(function(day) {  
-   forecastHTML = 
-    forecastHTML +
-    `
-    <span class="col-6">
-      <img
-        src="http://openweathermap.org/img/wn/50d@2x.png"
-        alt=""
-        width="42"
-      />
-      <span class="weather-forecast-temperatures"></span>
-        <span class="weather-forecast-temperature-max">18</span>
-        <span class="weather-forecast-temperature-min">12</span>
-      <span class="weather-forecast-date">${day}</span>
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast");
+  
+  let forecastHTML = "";
+  forecast.forEach(function(forecastDay, index) {  
+   if (index < 6){
+     forecastHTML += 
+        `
+        <span class="col-6">
+         <img
+         src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+         alt=""
+         width="42"
+       />
+      <span class="weather-forecast-temperatures">
+        <span class="weather-forecast-temperature-max">${Math.round(forecastDay.temp.max)}°</span>
+        <span class="weather-forecast-temperature-min">${Math.round(forecastDay.temp.min)}°</span>
+      <span class="weather-forecast-date">${formatDay(forecastDay.dt)}</span>${index}
     </span>
     `;
+   }
    });
   forecastElement.innerHTML = forecastHTML;
   }
+
 function getForecast(coordinates){
   let apiKey="2d30ea25b634d374a2711446360cd6b2";
   let url=`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${apiKey}&units=imperial`;
