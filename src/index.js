@@ -14,7 +14,7 @@ function formatDay(timestamp){
 }
 
 function displayForecast(response) {
-  let forecast = response.data.daily;
+  let forecast = response.daily;
 
   let forecastElement = document.querySelector("#forecast");
   
@@ -25,7 +25,7 @@ function displayForecast(response) {
         `
         <span class="col-6">
          <img
-         src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+         src= "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${forecastDay.weather[0].icon}.png"
          alt=""
          width="42"
        />
@@ -40,10 +40,11 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
   }
 
+
 function getForecast(coordinates) {
-  let apiKey = "6bfa54f242cbb59343d4e58db578dc61";
-  let url = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
-  axios.get(`${url}`).then(displayForecast);
+  let apiKey = "f8833caao3caf01e1ffbc8t348acfb03";
+  let url = `https://api.shecodes.io/weather/v1/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&key=${apiKey}&units=imperial`;
+  axios.get(url).then(displayForecast);
 }
 
 
