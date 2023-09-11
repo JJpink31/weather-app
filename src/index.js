@@ -40,12 +40,12 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHTML;
   }
 
-function getForecast(coordinates){
-  let apiKey="2d30ea25b634d374a2711446360cd6b2";
-  let url=`https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${apiKey}&units=imperial`;
-  axios.get(`${url}`).then(displayForecast);
-}
 
+function getForecast(coordinates) {
+  let apiKey = "0f8bc384a7c31b717a18cfe38a95ae06";
+  let url = `https://api.shecodes.io/weather/v1/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&key=${apiKey}&units=imperial`;
+  axios.get(url).then(displayForecast);
+}
 
 
 function currentTime(timestamp) {
