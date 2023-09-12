@@ -83,3 +83,19 @@ button {
   position: relative;
   font-size: 12px;
 }
+
+.col-6 {
+  text-align: center;
+}
+
+.weather-forecast-temperature-min {
+  display: block;
+  margin-top: -30px;
+  text-align: center;
+}
+
+#forecast {
+  display: block;
+  position: relative;
+  font-size: 20px;
+}
